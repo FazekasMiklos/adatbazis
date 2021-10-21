@@ -1,7 +1,7 @@
 <?php
 
 class ulesrend {
-    
+
     private $id;
     private $nev;
     private $sor;
@@ -30,6 +30,7 @@ class ulesrend {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
 }
+
     // építsük fel az összes get metódust
     public function get_nev() {  
         return $this->nev;
@@ -40,6 +41,27 @@ class ulesrend {
     public function get_felhasznalonev() {  
         return $this->felhasznalonev;
     }
+    public function get_sor() {  
+        return $this->sor;
+    }
+    public function get_oszlop(){
+        return $this->oszlop;
+    }
+    public function get_id(){
+        return $this->id;
+    }
+     public function tanulokListaja($conn){
+  $lista= array();       
+  $sql = "SELECT id FROM ulesrend";
+  if($result = $conn->query($sql)){
+if($result->num_rows>0){
+    while($row = $result->fetch_assoc()){
+        
+    }
+}
+  }
+  return $lista;
+}
 }
 //$tanulo = new ulesrend;
 

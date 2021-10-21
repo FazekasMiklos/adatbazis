@@ -2,6 +2,8 @@
 session_start();
 
 require 'db.inc.php';
+require 'model/ulesrend.php';
+$tanulo = new ulesrend;
 require 'functions.inc.php';
 
 
@@ -149,55 +151,41 @@ include 'htmlheader.php';
       </th>
     </tr>
     <tr>
-      <?php
+    <?php
 
-      $result = tanulokListaja($conn);
+$result = tanulokListaja($conn);
 
-      if ($result->num_rows > 0) {
-        // output data of each row
-        $sor = 0;
-        while ($row = $result->fetch_assoc()) {
-          if ($row["sor"] != $sor) {
-
-            if ($sor != 0) echo "</tr>";
-            echo '<tr>';
-            $sor = $row["sor"];
-          }
-          if (!$row["nev"]) {
-            $plusz .= ' class="empty"';
-            echo "<td" . $plusz . ">" . $row["nev"] . "</td>";
-          } else {
-            $plusz = ' ';
-            if (in_array($row["id"], $hianyzok)) $plusz .= ' class="missing"';
-            if ($row["id"]==$en) $plusz .= ' id="me"';
-            if (in_array($row["oszlop"] - 1, $osszevon[$sor - 1])) $plusz .= 'colspan="2"';
-            if (in_array($row["oszlop"] - 1, $von[$sor - 1])) $plusz .= 'rowspan="2"';
-            echo '<td' . $plusz . '>' . $row["nev"];
-            if (in_array($row["id"], $hianyzok)) echo '<br><a href="ulesrend.php?nem_hianyzo='.$row["id"].'">Nem hiányzó</a>';
-            echo "</td>";
-          }
-        }
-      } else {
-        echo "0 results";
+if ($result->num_rows > 0) {
+// output data of each row
+$sor = 0;
+while($row = $result->fetch_assoc()) {
+  $tanulo->set_user($row['id'], $conn);
+  if($tanulo->get_sor() != $sor) {
+    if($sor != 0) echo '</tr>';
+    echo '<tr>';
+    $sor = $tanulo->get_sor();
+  }
+  if(!$tanulo->get_nev()) echo '<td class="empty"></td>';
+  else {
+    $plusz = '';
+    if(in_array($row["id"], $hianyzok)) $plusz .=  ' class="missing"';
+    if($row["id"] == $en) $plusz .=  ' id="me"';
+    echo "<td".$plusz.">" . $tanulo->get_nev();
+    if(!empty($_SESSION["id"])) {
+      if(in_array($_SESSION["id"], $adminok)) {
+        if(in_array($row["id"], $hianyzok)) echo '<br><a href="ulesrend.php?nem_hianyzo='.$row["id"].'">Nem hiányzó</a>';
       }
-      $conn->close();
-      /*
-      foreach($osztaly as $sor => $tomb){
-      echo'<tr>';
-      foreach($tomb as $oszlop => $tanulo){
-         if($tanulo===NULL) echo'<td class="empty"></td>';
-         else{
-          $plusz =' ';
-          if(in_array($oszlop,$hianyzok[$sor])) $plusz .= ' class="missing"';
-          if(in_array($oszlop,$en[$sor])) $plusz .= ' id="me"';
-          if(in_array($oszlop,$osszevon[$sor])) $plusz .= 'colspan="2"';
-          if(in_array($oszlop,$von[$sor])) $plusz .= 'rowspan="2"';
-          echo '<td'.$plusz.'>'.$tanulo.'</td>';
-         }
-      }
-      echo'</tr>';
-    }*/
-      ?>
+    }
+    echo "</td>";
+  }
+}
+} 
+else {
+  echo "0 results";
+}
+$conn->close();
+
+?>
     </tr>
   </table>
 </body>
