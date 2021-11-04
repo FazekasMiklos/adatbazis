@@ -42,7 +42,7 @@ if(isset($_POST['user'])and isset($_POST['pw'])){
 </head>
 <?php
 $title = "Belépés";
-include 'htmlheader.php';
+include 'htmlheader.inc.php';
 ?>
 <body>
     <?php

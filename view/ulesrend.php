@@ -1,9 +1,4 @@
-<?php
-
-include 'htmlheader.php';
-
-?>
-	<body>
+<body>
 		<?php
 
 		include 'menu.inc.php';

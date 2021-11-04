@@ -38,7 +38,7 @@ $tanar = 17;
 
 $title = "Ülésrend";
 
-include 'htmlheader.php';
+include 'htmlheader.inc.php';
 
 ?>
 	<body>
