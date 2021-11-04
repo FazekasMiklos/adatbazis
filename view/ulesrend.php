@@ -1,10 +1,4 @@
-<body>
-		<?php
-
-		include 'menu.inc.php';
-
-		?>
-		<table>
+<table>
 			<tr>
 				<th colspan="3">
 					<h2>Ülésrend</h2>

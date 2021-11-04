@@ -13,7 +13,7 @@
             if($_SERVER['REQUEST_URI'] == '/teszt/'.$key) $active = ' active';
             ?>
             <li class="nav-item<?php echo $active; ?>">
-                <a class="nav-link" href="index.php?page="><?php echo $value; ?></a>
+                <a class="nav-link" href="index.php?page=<?php echo $key; ?>"><?php echo $value; ?></a>
             </li>
             <?php            
         }

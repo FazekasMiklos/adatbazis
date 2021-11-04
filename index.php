@@ -2,10 +2,11 @@
 
 session_start();
 
-require 'db.inc.php';
+require 'includes/db.inc.php';
 require 'model/ulesrend.php';
 $tanulo = new ulesrend;
-require 'functions.inc.php';
+require 'includes/functions.inc.php';
+
 $szoveg = "Belépés";
 $link = "belepes";
 
@@ -24,10 +25,12 @@ if(isset($_REQUEST['page'])){
 }
 $title = $menupontok[$page];
 
-include 'htmlheader.inc.php';
+include 'includes/htmlheader.inc.php';
 ?>
 <body>
   <?php
+  include 'includes/menu.inc.php';
+
 include 'controller/'.$page.'.php';
 ?>
 </body>
