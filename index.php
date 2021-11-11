@@ -5,7 +5,6 @@ session_start();
 require 'includes/db.inc.php';
 require 'model/ulesrend.php';
 $tanulo = new ulesrend;
-require 'includes/functions.inc.php';
 
 $page ='index';
 
