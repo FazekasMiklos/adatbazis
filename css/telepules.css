@@ -1,0 +1,18 @@
+*{
+    margin: auto;
+}
+
+table{
+    background-color:red;
+}
+th{
+    width: 200px;
+    background-color: blue;
+    color:black;
+    height: 50px;
+}
+td{
+    width: 160px;
+    background-color: green;
+    color:black;
+}
